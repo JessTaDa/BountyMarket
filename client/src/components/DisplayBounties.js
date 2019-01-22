@@ -1,7 +1,7 @@
 import React from 'react';
-import {Button, Input} from 'react-materialize';
+import {Button, CardPanel, Collection, CollectionItem} from 'react-materialize';
 
-export default class CreateBounty extends React.Component {
+export default class DisplayBounties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -13,22 +13,17 @@ export default class CreateBounty extends React.Component {
     }
   }
 
+  async componentDidMount() {
+    let bounty = await this.props.instance.getBountyByOwnerAddress(this.props.ownerAddress)
+    console.log('bounty', bounty);
+    console.log('this.state', this.state)
+  }
+
   render(props) {
     return(
       <div>
-      <h3>Create New Bounty</h3>
-      <form onSubmit={async (event) => {
-          event.preventDefault()
-          console.log('this.props', this.props)
-          const result = await this.props.instance.methods.createBounty(this.state.title, this.state.description, this.state.price, this.state.accepted).send({from: this.props.ownerAddress})
-          console.log('result', result)
-        }}>
-          <Input s={12} label="Title" type="text" onChange={event => this.setState({title: event.target.value})} />
-          <Input s={12} label="Description" type="text" onChange={event => this.setState({description: event.target.value})} />
-          <Input s={12} label="Price" type="text" onChange={event => this.setState({price: event.target.value})} />
-          <Input s={12} label="Accepted by Owner?" type="text" onChange={event => this.setState({accepted: event.target.value})} />
-          <button class="btn waves-effect waves-light" type="submit" name="action">Create Bounty</button>
-        </form>
+      <h3>Display Created Bounties</h3>
+      <p>{this.state.title}</p>
       </div>
     )
   }

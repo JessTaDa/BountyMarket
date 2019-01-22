@@ -1,7 +1,7 @@
 pragma solidity ^0.5.0;
 
 contract BountyMarket {
-
+  
   event BountyCreated(uint _id, string _title, string _description, uint _price, address _owner, bool _accepted);
 
   struct Bounty {
