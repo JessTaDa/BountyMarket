@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BountyMarket from "./contracts/BountyMarket.json";
 import getWeb3 from "./utils/getWeb3";
 import CreateBounty from './components/CreateBounty';
-import DisplayBounties from './components/DisplayBounties';
+// import DisplayBounties from './components/DisplayBounties';
 
 import {Button} from 'react-materialize';
 
@@ -46,11 +46,14 @@ class App extends Component {
     event.preventDefault();
     console.log('hello handleDocClick')
     console.log('handleDocClick this.state.instance', this.state.instance)
+    console.log('this.state.ownerAddress', this.state.ownerAddress)
     let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).send({from: this.state.ownerAddress})
+
     console.log('rawBountyIds', rawBountyIds)
-    let myBountyIds = await rawBountyIds.map(bignum => bignum.toNumber())
-    console.log('myBountyIds', myBountyIds)
-    this.setState({myBountyIds: myBountyIds})
+    // let myBountyIds = rawBountyIds.map(bignum => bignum.toNumber())
+    // console.log('myBountyIds', myBountyIds)
+    this.setState({myBountyIds: rawBountyIds})
+    console.log('this.state', this.state)
   }
 
   render() {
@@ -59,9 +62,6 @@ class App extends Component {
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
          <br/>
-        {this.state.myBountyIds.map((bountyId, index) =>
-          <DisplayBounties id={bountyId} instance={this.state.instance}/>
-        )}
          <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleDocClick}>My created Bounties</Button>
          </div>
      )

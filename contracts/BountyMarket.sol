@@ -1,14 +1,15 @@
 pragma solidity ^0.5.0;
 
 contract BountyMarket {
-  
-  event BountyCreated(uint _id, string _title, string _description, uint _price, address _owner, bool _accepted);
+
+  event BountyCreated(uint _id, string _title, string _description, uint _price, address _ownerAddress, bool _accepted);
+  event retrieveFromAddress(uint[] ids);
 
   struct Bounty {
     string title;
     string description;
     uint price;
-    address owner;
+    address ownerAddress;
     bool accepted;
   }
 
@@ -22,7 +23,9 @@ contract BountyMarket {
     emit BountyCreated(id, _title, _description, _price, msg.sender, _accepted);
   }
 
-  function getBountyByOwnerAddress(address ownerAddress) external view returns(uint[] memory ids) {
-    return ownerToBounty[ownerAddress];
+  function getBountyByOwnerAddress(address ownerAddress) external returns(uint[] memory ids) {
+    ids = ownerToBounty[ownerAddress];
+    emit retrieveFromAddress(ids);
+    return(ids);
   }
 }
