@@ -27,7 +27,7 @@ export default class CreateBounty extends React.Component {
           <Input s={12} label="Description" type="text" onChange={event => this.setState({description: event.target.value})} />
           <Input s={12} label="Price" type="text" onChange={event => this.setState({price: event.target.value})} />
           <Input s={12} label="Accepted by Owner?" type="text" onChange={event => this.setState({accepted: event.target.value})} />
-          <button class="btn waves-effect waves-light" type="submit" name="action">Create Bounty</button>
+          <Button class="btn waves-effect waves-light" type="submit" name="action">Create Bounty</Button>
         </form>
       </div>
     )
