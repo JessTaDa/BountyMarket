@@ -14,29 +14,24 @@ export default class DisplayBounties extends React.Component {
 
   async componentDidMount() {
     let bounty = await this.props.instance.methods.getBountyById(this.props.id).call({from: this.props.ownerAddress});
-    console.log('bounty.title', bounty.title);
-    console.log('bounty.description', bounty.description);
-    console.log('bounty.price', bounty.price);
-    console.log('bounty.accepted', bounty.accepted);
-
     this.setState({
       title: bounty.title,
       description: bounty.description,
       price: bounty.price,
       accepted: bounty.accepted
     })
-
-    console.log('display this.state', this.state)
   }
 
   render(props) {
     return(
       <div>
-      <h3>Display Created Bounties</h3>
-      <p>{this.state.title}</p>
-      <p>{this.state.description}</p>
-      <p>{this.state.price}</p>
-      <p>{this.state.accepted}</p>
+      <CardPanel className="teal lighten-4 black-text">
+      <Collection header={this.state.title}>
+        <CollectionItem>{this.state.description}</CollectionItem>
+        <CollectionItem>{this.state.price}</CollectionItem>
+        <CollectionItem>{this.state.accepted}</CollectionItem>
+        </Collection>
+      </CardPanel>
       </div>
     )
   }
