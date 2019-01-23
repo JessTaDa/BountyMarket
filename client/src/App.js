@@ -23,7 +23,6 @@ class App extends Component {
       myBountyIds: []
     }
     this.handleDocClick = this.handleDocClick.bind(this);
-
   }
 
   componentDidMount = async () => {
@@ -44,20 +43,14 @@ class App extends Component {
 
   async handleDocClick(event) {
     event.preventDefault();
-    console.log('hello handleDocClick')
-    console.log('handleDocClick this.state.instance', this.state.instance)
-    console.log('this.state.ownerAddress', this.state.ownerAddress)
-    let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).send({from: this.state.ownerAddress})
-
+    let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).call({from: this.state.ownerAddress})
     console.log('rawBountyIds', rawBountyIds)
-    // let myBountyIds = rawBountyIds.map(bignum => bignum.toNumber())
-    // console.log('myBountyIds', myBountyIds)
     this.setState({myBountyIds: rawBountyIds})
-    console.log('this.state', this.state)
   }
 
   render() {
-    console.log('render. this.state.instance', this.state.instance)
+    console.log('render')
+
      return (
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
