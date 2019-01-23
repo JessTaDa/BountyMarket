@@ -26,4 +26,8 @@ contract BountyMarket {
   function getBountyByOwnerAddress(address ownerAddress) external view returns(uint[] memory) {
     return ownerToBounty[ownerAddress];
   }
+
+  function getBountyById(uint id) external view returns(string memory title, string memory description, uint price, address ownerAddress, bool accepted) {
+    return (bounties[id].title, bounties[id].description, bounties[id].price, bounties[id].ownerAddress, bounties[id].accepted);
+  }
 }

@@ -5,7 +5,7 @@ export default class DisplayBounties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "",
+      title: "Not real title",
       description: "",
       price: 12,
       // ownerAddress: "",
@@ -14,16 +14,14 @@ export default class DisplayBounties extends React.Component {
   }
 
   async componentDidMount() {
-    let bounty = await this.props.instance.getBountyByOwnerAddress(this.props.ownerAddress)
+    let bounty = await this.props.instance.methods.getBountyById(this.props.id).call({from: this.props.ownerAddress});
     console.log('bounty', bounty);
-    console.log('this.state', this.state)
   }
 
   render(props) {
     return(
       <div>
       <h3>Display Created Bounties</h3>
-      <p>{this.state.title}</p>
       </div>
     )
   }

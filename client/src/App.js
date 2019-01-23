@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BountyMarket from "./contracts/BountyMarket.json";
 import getWeb3 from "./utils/getWeb3";
 import CreateBounty from './components/CreateBounty';
-// import DisplayBounties from './components/DisplayBounties';
+import DisplayBounties from './components/DisplayBounties';
 
 import {Button} from 'react-materialize';
 
@@ -44,17 +44,18 @@ class App extends Component {
   async handleDocClick(event) {
     event.preventDefault();
     let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).call({from: this.state.ownerAddress})
-    console.log('rawBountyIds', rawBountyIds)
     this.setState({myBountyIds: rawBountyIds})
+    console.log('this.state', this.state)
   }
 
   render() {
-    console.log('render')
-
      return (
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
          <br/>
+
+         {this.state.myBountyIds.map((BountyId) => <DisplayBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+
          <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleDocClick}>My created Bounties</Button>
          </div>
      )
