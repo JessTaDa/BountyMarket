@@ -1,7 +1,7 @@
 import React from 'react';
 import {Button, CardPanel, Collection, CollectionItem} from 'react-materialize';
 
-export default class DisplayBounties extends React.Component {
+export default class DisplayMyBounties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import BountyMarket from "./contracts/BountyMarket.json";
 import getWeb3 from "./utils/getWeb3";
 import CreateBounty from './components/CreateBounty';
-import DisplayBounties from './components/DisplayBounties';
+// import DisplayMyBounties from './components/DisplayMyBounties';
+import DisplayAllBounties from './components/DisplayAllBounties';
+
 
 import {Button} from 'react-materialize';
 
@@ -20,9 +22,12 @@ class App extends Component {
       web3: null,
       accounts: null,
       contract: null,
-      myBountyIds: []
+      myBountyIds: [],
+      allBountyIds: []
     }
-    this.handleDocClick = this.handleDocClick.bind(this);
+    this.myBountiesHandleClick = this.myBountiesHandleClick.bind(this);
+    this.allBountiesHandleClickAll = this.allBountiesHandleClickAll.bind(this);
+
   }
 
   componentDidMount = async () => {
@@ -41,11 +46,17 @@ class App extends Component {
     }
   };
 
-  async handleDocClick(event) {
+  async myBountiesHandleClick(event) {
     event.preventDefault();
     let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).call({from: this.state.ownerAddress})
     this.setState({myBountyIds: rawBountyIds})
-    console.log('this.state', this.state)
+    console.log('myBountiesHandleClick.this.state', this.state)
+  }
+
+  async allBountiesHandleClickAll(event) {
+    event.preventDefault();
+    this.setState({allBountyIds: [1,2,3,4,5,6,7,8,9,10]}); //testing for now})
+    console.log('allBountiesHandleClickAll.this.state', this.state)
   }
 
   render() {
@@ -53,15 +64,18 @@ class App extends Component {
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
          <br/>
-         {this.state.myBountyIds.map((BountyId) => <DisplayBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
 
-
-
-
-         <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleDocClick}>My created Bounties</Button>
+         <br/>
+         {this.state.allBountyIds.map((BountyId) =>
+            <DisplayAllBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+            <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.allBountiesHandleClickAll}>Display All Bounties</Button>
          </div>
      )
   }
 }
+
+{/*{this.state.myBountyIds.map((BountyId) =>
+   <DisplayMyBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+   <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>*/}
 
 export default App;
