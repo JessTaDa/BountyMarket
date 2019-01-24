@@ -12,14 +12,31 @@ contract BountyMarket {
     bool accepted;
   }
 
+  struct Submission {
+    string text;
+    address submittorAddress;
+  }
+
   Bounty[] public bounties;
+  Submission[] public submissions;
   mapping (uint => address) public bountyToOwner;
   mapping (address => uint[]) public ownerToBounty;
+  mapping (uint => uint[]) public bountyIdToSubmissionId;
 
   function createBounty(string memory _title, string memory _description, uint _price, bool _accepted) public {
     uint id = bounties.push(Bounty(_title, _description, _price, msg.sender, _accepted)) -1;
     bountyToOwner[id] = msg.sender;
     ownerToBounty[msg.sender].push(id);
+    emit BountyCreated(id, _title, _description, _price, msg.sender, _accepted);
+  }
+
+  function createSubmission(string memory _text) public {
+    uint submissionsId = submissions.push(Submission(_text, msg.sender)) -1;
+
+    bountyIdToSubmissionId[]
+    /* uint id = bounties.push(Bounty(_title, _description, _price, msg.sender, _accepted)) -1;
+    bountyToOwner[id] = msg.sender;
+    ownerToBounty[msg.sender].push(id); */
     emit BountyCreated(id, _title, _description, _price, msg.sender, _accepted);
   }
 
