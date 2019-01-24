@@ -4,6 +4,8 @@ contract BountyMarket {
 
   event BountyCreated(uint _id, string _title, string _description, uint _price, address _ownerAddress, bool _accepted);
 
+  event SubmissionCreated(uint _bountyId, address submittorAddress, uint submissionId, string _text);
+
   struct Bounty {
     string title;
     string description;
@@ -13,6 +15,7 @@ contract BountyMarket {
   }
 
   struct Submission {
+    bool accepted;
     string text;
     address submittorAddress;
   }
@@ -21,7 +24,7 @@ contract BountyMarket {
   Submission[] public submissions;
   mapping (uint => address) public bountyToOwner;
   mapping (address => uint[]) public ownerToBounty;
-  mapping (uint => uint[]) public bountyIdToSubmissionId;
+  mapping (uint => uint[]) public bountyIdToSubmissionIds;
 
   function createBounty(string memory _title, string memory _description, uint _price, bool _accepted) public {
     uint id = bounties.push(Bounty(_title, _description, _price, msg.sender, _accepted)) -1;
@@ -30,14 +33,14 @@ contract BountyMarket {
     emit BountyCreated(id, _title, _description, _price, msg.sender, _accepted);
   }
 
-  function createSubmission(string memory _text) public {
-    uint submissionsId = submissions.push(Submission(_text, msg.sender)) -1;
+  function createBountySubmission(uint _bountyId, string memory _text) public {
+    uint submissionId = submissions.push(Submission(false, _text, msg.sender)) -1;
+    bountyIdToSubmissionIds[_bountyId].push(submissionId);
+    emit SubmissionCreated(_bountyId, msg.sender, submissionId, _text);
+  }
 
-    bountyIdToSubmissionId[]
-    /* uint id = bounties.push(Bounty(_title, _description, _price, msg.sender, _accepted)) -1;
-    bountyToOwner[id] = msg.sender;
-    ownerToBounty[msg.sender].push(id); */
-    emit BountyCreated(id, _title, _description, _price, msg.sender, _accepted);
+  function retrieveSubmissionsIds(uint _bountyId) external view returns (uint[] memory _submissionIds) {
+    return bountyIdToSubmissionIds[_bountyId];
   }
 
   function getBountyByOwnerAddress(address ownerAddress) external view returns(uint[] memory) {

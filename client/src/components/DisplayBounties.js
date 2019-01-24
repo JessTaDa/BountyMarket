@@ -8,8 +8,10 @@ export default class DisplayBounties extends React.Component {
       title: "Not real title",
       description: "",
       price: 2,
-      accepted: false
+      accepted: false,
+      submissionIds: []
     }
+    this.handleClick = this.handleClick.bind(this);
   }
 
   async componentDidMount() {
@@ -22,6 +24,15 @@ export default class DisplayBounties extends React.Component {
     })
   }
 
+  async handleClick(event) {
+    console.log("hello")
+    event.preventDefault();
+    let submissionIds = await this.props.instance.methods.retrieveSubmissionsIds(this.props.id).call({from: this.props.ownerAddress});
+    this.setState({submissionIds: submissionIds})
+    console.log("hancleClick this.state", this.state)
+
+  }
+
   render(props) {
     return(
       <div>
@@ -31,6 +42,8 @@ export default class DisplayBounties extends React.Component {
         <CollectionItem>{this.state.price}</CollectionItem>
         <CollectionItem>{this.state.accepted}</CollectionItem>
         </Collection>
+        <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>See Bounty Submissions</Button>
+
       </CardPanel>
       </div>
     )

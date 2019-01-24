@@ -53,8 +53,10 @@ class App extends Component {
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
          <br/>
-
          {this.state.myBountyIds.map((BountyId) => <DisplayBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+
+
+
 
          <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleDocClick}>My created Bounties</Button>
          </div>
