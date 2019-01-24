@@ -21,11 +21,7 @@ export default class DisplaySubmissions extends React.Component {
   render(props) {
     return(
       <div>
-      <CardPanel className="teal lighten-4 black-text">
-      <Collection header="Submissions">
-        <CollectionItem>{this.state.submissionText}</CollectionItem>
-        </Collection>
-      </CardPanel>
+        <p>{this.state.submissionText}</p>
       </div>
     )
   }
