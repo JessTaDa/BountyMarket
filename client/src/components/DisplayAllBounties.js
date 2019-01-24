@@ -42,7 +42,6 @@ export default class DisplayAllBounties extends React.Component {
         <Input s={12} label="Submission" type="text" onChange={event => this.setState({text: event.target.value})} />
       </Collection>
       <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>Submit</Button>
-
       </CardPanel>
       </div>
     )

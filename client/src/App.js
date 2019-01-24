@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import BountyMarket from "./contracts/BountyMarket.json";
 import getWeb3 from "./utils/getWeb3";
 import CreateBounty from './components/CreateBounty';
-// import DisplayMyBounties from './components/DisplayMyBounties';
+import DisplayMyBounties from './components/DisplayMyBounties';
 import DisplayAllBounties from './components/DisplayAllBounties';
 
 
@@ -50,12 +50,12 @@ class App extends Component {
     event.preventDefault();
     let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).call({from: this.state.ownerAddress})
     this.setState({myBountyIds: rawBountyIds})
-    console.log('myBountiesHandleClick.this.state', this.state)
+    console.log('App.js myBountiesHandleClick.this.state', this.state)
   }
 
   async allBountiesHandleClickAll(event) {
     event.preventDefault();
-    this.setState({allBountyIds: [1,2,3,4,5,6,7,8,9,10]}); //testing for now})
+    this.setState({allBountyIds: [0,1,2,3,4,5,6,7,8,9,10]}); //testing for now})
     console.log('allBountiesHandleClickAll.this.state', this.state)
   }
 
@@ -64,6 +64,9 @@ class App extends Component {
        <div>
          <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
          <br/>
+         {this.state.myBountyIds.map((BountyId) =>
+            <DisplayMyBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+            <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>
 
          <br/>
          {this.state.allBountyIds.map((BountyId) =>
@@ -74,8 +77,5 @@ class App extends Component {
   }
 }
 
-{/*{this.state.myBountyIds.map((BountyId) =>
-   <DisplayMyBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
-   <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>*/}
 
 export default App;
