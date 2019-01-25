@@ -9,7 +9,7 @@ export default class DisplayMyBounties extends React.Component {
     this.state = {
       title: "Not real title",
       description: "",
-      price: null,
+      reward: null,
       accepted: false,
       submissionIds: []
     }
@@ -21,7 +21,7 @@ export default class DisplayMyBounties extends React.Component {
     this.setState({
       title: bounty.title,
       description: bounty.description,
-      price: bounty.price,
+      reward: bounty.reward,
       accepted: bounty.accepted
     })
     console.log("Dis My Bounties Component Did Mount this.state", this.state)
@@ -43,11 +43,11 @@ export default class DisplayMyBounties extends React.Component {
       <CardPanel className="teal lighten-4 black-text">
       <Collection header={this.state.title}>
         <CollectionItem>{this.state.description}</CollectionItem>
-        <CollectionItem>{this.state.price}</CollectionItem>
+        <CollectionItem>{this.state.reward}</CollectionItem>
         <CollectionItem>{this.state.accepted}</CollectionItem>
         </Collection>
         {this.state.submissionIds.map((SubmissionId) =>
-           <DisplaySubmissions submissionId={SubmissionId} bountyId={this.props.bountyId} instance={this.props.instance} ownerAddress={this.props.ownerAddress}/>)}
+           <DisplaySubmissions submissionId={SubmissionId} bountyId={this.props.bountyId} bountyReward={this.state.reward} instance={this.props.instance} ownerAddress={this.props.ownerAddress}/>)}
         <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>See Bounty Submissions</Button>
 
       </CardPanel>

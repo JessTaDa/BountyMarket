@@ -58,7 +58,7 @@ contract BountyMarket {
 
   function approveAndTransfer(uint _bountyId, uint _submissionId) payable public {
     submissions[_submissionId].approved = true;
-    submissions[_submissionId].submittorAddress.transfer(bounties[_bountyId].reward);
+    submissions[_submissionId].submittorAddress.transfer(msg.value);
     emit SubmissionApprovedTransferred(_bountyId, bounties[_bountyId].ownerAddress, submissions[_submissionId].submittorAddress, bounties[_bountyId].reward);
   }
 }

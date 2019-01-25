@@ -15,7 +15,7 @@ class App extends Component {
       id: 0,
       title: "",
       description: "",
-      price: "",
+      reward: "",
       ownerAddress: "",
       accepted: false,
       instance: null,
