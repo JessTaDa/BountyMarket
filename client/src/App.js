@@ -67,7 +67,7 @@ class App extends Component {
          {this.state.myBountyIds.map((BountyId) =>
             <DisplayMyBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
             <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>
-
+         <br/>
          <br/>
          {this.state.allBountyIds.map((BountyId) =>
             <DisplayAllBounties id={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
