@@ -4,8 +4,6 @@ import getWeb3 from "./utils/getWeb3";
 import CreateBounty from './components/CreateBounty';
 import DisplayMyBounties from './components/DisplayMyBounties';
 import DisplayAllBounties from './components/DisplayAllBounties';
-
-
 import {Button} from 'react-materialize';
 
 class App extends Component {
@@ -27,7 +25,6 @@ class App extends Component {
     }
     this.myBountiesHandleClick = this.myBountiesHandleClick.bind(this);
     this.allBountiesHandleClickAll = this.allBountiesHandleClickAll.bind(this);
-
   }
 
   componentDidMount = async () => {

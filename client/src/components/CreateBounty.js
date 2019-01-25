@@ -7,7 +7,7 @@ export default class CreateBounty extends React.Component {
     this.state = {
       title: "",
       description: "",
-      price: null,
+      reward: null,
       accepted: false
     }
   }
@@ -18,13 +18,11 @@ export default class CreateBounty extends React.Component {
       <h3>Create New Bounty</h3>
       <form onSubmit={async (event) => {
           event.preventDefault()
-          console.log('this.props', this.props)
-          const result = await this.props.instance.methods.createBounty(this.state.title, this.state.description, this.state.price, this.state.accepted).send({from: this.props.ownerAddress})
-          console.log('result', result)
+          await this.props.instance.methods.createBounty(this.state.title, this.state.description, this.state.reward, this.state.accepted).send({from: this.props.ownerAddress})
         }}>
           <Input s={12} label="Title" type="text" onChange={event => this.setState({title: event.target.value})} />
           <Input s={12} label="Description" type="text" onChange={event => this.setState({description: event.target.value})} />
-          <Input s={12} label="Price" type="text" onChange={event => this.setState({price: event.target.value})} />
+          <Input s={12} label="reward" type="text" onChange={event => this.setState({reward: event.target.value})} />
           <Input s={12} label="Accepted by Owner?" type="text" onChange={event => this.setState({accepted: event.target.value})} />
           <Button class="btn waves-effect waves-light" type="submit" name="action">Create Bounty</Button>
         </form>

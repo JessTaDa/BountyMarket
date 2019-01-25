@@ -2,7 +2,6 @@ import React from 'react';
 import {Button, CardPanel, Collection, CollectionItem} from 'react-materialize';
 import DisplaySubmissions from './DisplaySubmissions';
 
-
 export default class DisplayMyBounties extends React.Component {
   constructor(props) {
     super(props)
@@ -24,8 +23,6 @@ export default class DisplayMyBounties extends React.Component {
       reward: bounty.reward,
       accepted: bounty.accepted
     })
-    console.log("Dis My Bounties Component Did Mount this.state", this.state)
-
   }
 
   async handleClick(event) {
@@ -33,8 +30,6 @@ export default class DisplayMyBounties extends React.Component {
     event.preventDefault();
     let submissionIds = await this.props.instance.methods.retrieveSubmissionsIds(this.props.bountyId).call({from: this.props.ownerAddress});
     this.setState({submissionIds: submissionIds})
-    console.log("DisplayMyBounties hancleClick this.state", this.state)
-
   }
 
   render(props) {
@@ -49,7 +44,6 @@ export default class DisplayMyBounties extends React.Component {
         {this.state.submissionIds.map((SubmissionId) =>
            <DisplaySubmissions submissionId={SubmissionId} bountyId={this.props.bountyId} bountyReward={this.state.reward} instance={this.props.instance} ownerAddress={this.props.ownerAddress}/>)}
         <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>See Bounty Submissions</Button>
-
       </CardPanel>
       </div>
     )
