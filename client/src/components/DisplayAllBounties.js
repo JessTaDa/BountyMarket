@@ -7,7 +7,7 @@ export default class DisplayAllBounties extends React.Component {
     this.state = {
       title: "Not real title",
       description: "",
-      price: 2,
+      price: null,
       accepted: false,
       text: "blank string"
     }
@@ -15,7 +15,7 @@ export default class DisplayAllBounties extends React.Component {
   }
 
   async componentDidMount() {
-    let bounty = await this.props.instance.methods.getBountyById(this.props.id).call({from: this.props.ownerAddress});
+    let bounty = await this.props.instance.methods.getBountyById(this.props.bountyId).call({from: this.props.ownerAddress});
     this.setState({
       title: bounty.title,
       description: bounty.description,
@@ -28,7 +28,7 @@ export default class DisplayAllBounties extends React.Component {
     console.log("trying to make submission")
     console.log("handleClick this.state", this.state)
     event.preventDefault();
-    let submissionText = await this.props.instance.methods.createBountySubmission(this.props.id, this.state.text).send({from: this.props.ownerAddress});
+    let submissionText = await this.props.instance.methods.createBountySubmission(this.props.bountyId, this.state.text).send({from: this.props.ownerAddress});
     console.log('submissionText', submissionText)
   }
 

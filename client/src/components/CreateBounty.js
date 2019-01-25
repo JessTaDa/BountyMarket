@@ -7,8 +7,7 @@ export default class CreateBounty extends React.Component {
     this.state = {
       title: "",
       description: "",
-      price: 12,
-      // ownerAddress: "",
+      price: null,
       accepted: false
     }
   }

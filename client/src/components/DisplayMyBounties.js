@@ -9,7 +9,7 @@ export default class DisplayMyBounties extends React.Component {
     this.state = {
       title: "Not real title",
       description: "",
-      price: 2,
+      price: null,
       accepted: false,
       submissionIds: []
     }
@@ -17,7 +17,7 @@ export default class DisplayMyBounties extends React.Component {
   }
 
   async componentDidMount() {
-    let bounty = await this.props.instance.methods.getBountyById(this.props.id).call({from: this.props.ownerAddress});
+    let bounty = await this.props.instance.methods.getBountyById(this.props.bountyId).call({from: this.props.ownerAddress});
     this.setState({
       title: bounty.title,
       description: bounty.description,
@@ -31,7 +31,7 @@ export default class DisplayMyBounties extends React.Component {
   async handleClick(event) {
     console.log("hello")
     event.preventDefault();
-    let submissionIds = await this.props.instance.methods.retrieveSubmissionsIds(this.props.id).call({from: this.props.ownerAddress});
+    let submissionIds = await this.props.instance.methods.retrieveSubmissionsIds(this.props.bountyId).call({from: this.props.ownerAddress});
     this.setState({submissionIds: submissionIds})
     console.log("DisplayMyBounties hancleClick this.state", this.state)
 
@@ -47,7 +47,7 @@ export default class DisplayMyBounties extends React.Component {
         <CollectionItem>{this.state.accepted}</CollectionItem>
         </Collection>
         {this.state.submissionIds.map((SubmissionId) =>
-           <DisplaySubmissions submissionId={SubmissionId} instance={this.props.instance} ownerAddress={this.state.ownerAddress}/>)}
+           <DisplaySubmissions submissionId={SubmissionId} bountyId={this.props.bountyId} instance={this.props.instance} ownerAddress={this.props.ownerAddress}/>)}
         <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>See Bounty Submissions</Button>
 
       </CardPanel>
