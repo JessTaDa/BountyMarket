@@ -33,7 +33,7 @@ export default class DisplayMyBounties extends React.Component {
     event.preventDefault();
     let submissionIds = await this.props.instance.methods.retrieveSubmissionsIds(this.props.id).call({from: this.props.ownerAddress});
     this.setState({submissionIds: submissionIds})
-    console.log("Dis My Bounties hancleClick this.state", this.state)
+    console.log("DisplayMyBounties hancleClick this.state", this.state)
 
   }
 
@@ -48,8 +48,6 @@ export default class DisplayMyBounties extends React.Component {
         </Collection>
         {this.state.submissionIds.map((SubmissionId) =>
            <DisplaySubmissions submissionId={SubmissionId} instance={this.props.instance} ownerAddress={this.state.ownerAddress}/>)}
-           <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>
-
         <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>See Bounty Submissions</Button>
 
       </CardPanel>

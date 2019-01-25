@@ -43,8 +43,8 @@ contract BountyMarket {
     return bountyIdToSubmissionIds[_bountyId];
   }
 
-  function retrieveSubmissionsTextFromIds(uint _submissionId) external view returns (string memory _submissionText) {
-    return submissions[_submissionId].text;
+  function retrieveSubmissionsTextandAddressFromIds(uint _submissionId) external view returns (string memory _submissionText, address _submittorAddress) {
+    return (submissions[_submissionId].text, submissions[_submissionId].submittorAddress);
   }
 
   function getBountyByOwnerAddress(address ownerAddress) external view returns(uint[] memory) {
