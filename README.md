@@ -52,3 +52,8 @@ First, click on the 'Display all bounties' button to view all available bounties
 Submissions will be made under the address and account you are signed into so make sure you check that this is correct. If metamask is having issues recognising your address, refresh the browser page.
 
 ## Future features
+### Automatic app refresh
+Currently users of the Dapp are required to manually refresh the page in the browser when changing between accounts in Metamask. A future feature would be to make this refresh automatic when a change in accounts has been detected.
+
+### Displaying empty bounty cards
+Currently empty bounty cards are displayed when the user clicks on the 'Display All Bounties' button. A future feature would be to map through the length of bounties[] and only display bounties that have been created by users of the Dapp.

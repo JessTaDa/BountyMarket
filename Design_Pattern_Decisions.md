@@ -12,3 +12,10 @@ At the moment anyone can be a bounty poster and a submittor. The restricting acc
 ### Prevent re-entrancy
 Steps have been taken to prevent re-entrancy in the contract. Use of address.transfer() instead of address.send()
 The contract makes use of ```.address.transfer()``` in the contract function ```approveAndTransfer``` instead of ```address.send()```. This is a safer way of implementing transactions.
+
+## Further Future features
+### Automatic app refresh
+Currently users of the Dapp are required to manually refresh the page in the browser when changing between accounts in Metamask. A future feature would be to make this refresh automatic when a change in accounts has been detected.
+
+### Displaying empty bounty cards
+Currently empty bounty cards are displayed when the user clicks on the 'Display All Bounties' button. A future feature would be to map through the length of bounties[] and only display bounties that have been created by users of the Dapp.
