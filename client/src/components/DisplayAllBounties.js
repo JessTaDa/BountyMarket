@@ -5,11 +5,11 @@ export default class DisplayAllBounties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "Not real title",
+      title: "",
       description: "",
       reward: null,
       accepted: false,
-      text: "blank string"
+      text: ""
     }
     this.handleClick = this.handleClick.bind(this);
   }

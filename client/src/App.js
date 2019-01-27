@@ -53,7 +53,7 @@ class App extends Component {
   // call contract method 'getBountyByOwnerAddress' to retrieve all bounties ids from bounties created.
   async allBountiesHandleClickAll(event) {
     event.preventDefault();
-    this.setState({allBountyIds: [0,1,2,3,4,5]}); //testing for now, should implement method to map through each bounty in bounties[] in the future})
+    this.setState({allBountyIds: [0,1,2,3,4,5,6,7,8,9,10]}); //testing for now, should implement method to map through each bounty in bounties[] in the future})
     console.log('allBountiesHandleClickAll.this.state', this.state)
   }
 

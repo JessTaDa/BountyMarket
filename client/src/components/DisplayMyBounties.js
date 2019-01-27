@@ -6,7 +6,7 @@ export default class DisplayMyBounties extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      title: "Not real title",
+      title: "",
       description: "",
       reward: null,
       accepted: false,

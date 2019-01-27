@@ -73,27 +73,27 @@ contract BountyMarket is Ownable {
 
   /** @dev retrieve submissions objects with submission ids, once they have been submitted
   @param _bountyId - submissions are retrieved for this bounty
-  @returns a list of submissionId's linked to the bounty */
+  @return a list of submissionId's linked to the bounty */
   function retrieveSubmissionsIds(uint _bountyId) external view returns (uint[] memory _submissionIds) {
     return bountyIdToSubmissionIds[_bountyId];
   }
 
   /** @dev retrieve the text and submittor address of a submission with a submission id
   @param _submissionId - submissions id to retrieve submission text and submittor address
-  @returns text and submittor ddress of submission */
+  @return text and submittor ddress of submission */
   function retrieveSubmissionsTextandAddressFromIds(uint _submissionId) external view returns (string memory _submissionText, address _submittorAddress) {
     return (submissions[_submissionId].text, submissions[_submissionId].submittorAddress);
   }
   /** @dev retrieve bounty with a bounty owners address
   @param ownerAddress - bounty owner address
-  @returns array of bountyId's associated with address for all bounties created byt this owner */
+  @return array of bountyId's associated with address for all bounties created byt this owner */
   function getBountyByOwnerAddress(address ownerAddress) external view returns(uint[] memory) {
     return ownerToBounty[ownerAddress];
   }
 
   /** @dev retrieve bounty with a bounty owners id
   @param id - bounty id
-  @returns title, description, bounty reward, owner address and approval state of Bounty retrieved by bounty id */
+  @return title, description, bounty reward, owner address and approval state of Bounty retrieved by bounty id */
   function getBountyById(uint id) external view returns(string memory title, string memory description, uint reward, address ownerAddress, bool approved) {
     return (bounties[id].title, bounties[id].description, bounties[id].reward, bounties[id].ownerAddress, bounties[id].approved);
   }
