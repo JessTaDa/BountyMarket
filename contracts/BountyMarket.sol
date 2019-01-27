@@ -1,15 +1,33 @@
 pragma solidity ^0.5.0;
 
-contract BountyMarket {
+//import Ownable contract from openzeppelin-solidity for basic authorization control
+import 'openzeppelin-solidity/contracts/ownership/Ownable.sol';
+
+contract BountyMarket is Ownable {
 
   event BountyCreated(uint _id, string _title, string _description, uint _reward, address _ownerAddress, bool _approved);
   event SubmissionCreated(uint _bountyId, address submittorAddress, uint submissionId, string _text);
   event SubmissionApprovedTransferred(uint _bountyId, address _ownerAddress, address _submittorAddress, uint reward);
 
-  address payable public owner;
+  /* address payable public owner; */
 
-  constructor() public {
+  /* constructor() public {
     owner = msg.sender;
+  } */
+
+  modifier valueNotZero(uint _value) {
+    require(_value != 0);
+    _;
+  }
+
+  modifier checkRewardDeposit(uint _bountyId) {
+      require(bounties[_bountyId].ownerAddress.balance >= bounties[_bountyId].reward, 'Not enough funds on balance to pay the reward');
+      _;
+  }
+
+  modifier onlyBountyOwner(uint _bountyId) {
+    require(msg.sender == bounties[_bountyId].ownerAddress);
+    _;
   }
 
   struct Bounty {
@@ -32,17 +50,17 @@ contract BountyMarket {
   mapping (address => uint[]) public ownerToBounty;
   mapping (uint => uint[]) public bountyIdToSubmissionIds;
 
-  function createBounty(string memory _title, string memory _description, uint _reward, bool _approved) public {
-    uint id = bounties.push(Bounty(_title, _description, _reward, owner, _approved)) -1;
-    bountyToOwner[id] = owner;
-    ownerToBounty[owner].push(id);
-    emit BountyCreated(id, _title, _description, _reward, owner, _approved);
+  function createBounty(string memory _title, string memory _description, uint _reward, bool _approved) public valueNotZero(_reward) {
+    uint id = bounties.push(Bounty(_title, _description, _reward, msg.sender, _approved)) -1;
+    bountyToOwner[id] = msg.sender;
+    ownerToBounty[msg.sender].push(id);
+    emit BountyCreated(id, _title, _description, _reward, msg.sender, _approved);
   }
 
   function createBountySubmission(uint _bountyId, string memory _text) public {
-    uint submissionId = submissions.push(Submission(false, _text, owner)) -1;
+    uint submissionId = submissions.push(Submission(false, _text, msg.sender)) -1;
     bountyIdToSubmissionIds[_bountyId].push(submissionId);
-    emit SubmissionCreated(_bountyId, owner, submissionId, _text);
+    emit SubmissionCreated(_bountyId, msg.sender, submissionId, _text);
   }
 
   function retrieveSubmissionsIds(uint _bountyId) external view returns (uint[] memory _submissionIds) {
@@ -61,7 +79,7 @@ contract BountyMarket {
     return (bounties[id].title, bounties[id].description, bounties[id].reward, bounties[id].ownerAddress, bounties[id].approved);
   }
 
-  function approveAndTransfer(uint _bountyId, uint _submissionId) payable public {
+  function approveAndTransfer(uint _bountyId, uint _submissionId) payable public checkRewardDeposit(_bountyId) onlyBountyOwner(_bountyId) {
     submissions[_submissionId].approved = true;
     submissions[_submissionId].submittorAddress.transfer(msg.value);
     emit SubmissionApprovedTransferred(_bountyId, bounties[_bountyId].ownerAddress, submissions[_submissionId].submittorAddress, bounties[_bountyId].reward);

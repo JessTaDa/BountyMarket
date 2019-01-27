@@ -59,17 +59,22 @@ class App extends Component {
   render() {
      return (
        <div>
-         <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
-         <br/>
-         {this.state.myBountyIds.map((BountyId) =>
-            <DisplayMyBounties bountyId={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
-            <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>
-         <br/>
-         <br/>
-         {this.state.allBountyIds.map((BountyId) =>
-            <DisplayAllBounties bountyId={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
-            <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.allBountiesHandleClickAll}>Display All Bounties</Button>
-         </div>
+       <br/>
+       <br/>
+       Hello! Welcome to the Bounty Market. Your address is {this.state.ownerAddress}
+       <br/>
+       <br/>
+       <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
+       <br/>
+       {this.state.myBountyIds.map((BountyId) =>
+          <DisplayMyBounties bountyId={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+          <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.myBountiesHandleClick}>My created Bounties</Button>
+       <br/>
+       <br/>
+       {this.state.allBountyIds.map((BountyId) =>
+          <DisplayAllBounties bountyId={BountyId} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>)}
+          <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.allBountiesHandleClickAll}>Display All Bounties</Button>
+       </div>
      )
   }
 }

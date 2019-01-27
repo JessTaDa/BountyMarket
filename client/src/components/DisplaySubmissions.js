@@ -38,8 +38,7 @@ export default class DisplaySubmissions extends React.Component {
       <CardPanel className="teal lighten-4 black-text">
         <p><strong>Response: </strong> {this.state.submissionText}</p>
         <p><strong>Submitted By: </strong> {this.state.submittorAddress}</p>
-        <p><strong>Approved?: </strong> {this.state.approved}
-          <Button class="btn waves-effect waves-light" type="submit" name="action" value="button" onClick={this.handleApproval}>Send Winner Money!</Button></p>
+          <Button class="btn waves-effect waves-light" type="submit" name="action" value="button" onClick={this.handleApproval}>Winner! Send Submittor Reward!</Button>
       </CardPanel>
       </div>
     )
