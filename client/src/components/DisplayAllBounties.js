@@ -38,7 +38,7 @@ export default class DisplayAllBounties extends React.Component {
       <CardPanel className="teal lighten-4 black-text">
       <Collection header={this.state.title}>
         <CollectionItem><strong>Task Description: </strong>{this.state.description}</CollectionItem>
-        <CollectionItem><strong>reward (wei): </strong>{this.state.reward}</CollectionItem>
+        <CollectionItem><strong>Reward (ETH): </strong>{this.state.reward}</CollectionItem>
         <Input s={12} label="Type your response to bounty here" type="text" onChange={event => this.setState({text: event.target.value})} />
       </Collection>
       <Button class="btn waves-effect waves-light" type="submit" name="action" value="Button" onClick={this.handleClick}>Submit</Button>

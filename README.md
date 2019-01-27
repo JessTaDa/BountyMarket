@@ -1,5 +1,4 @@
 # Bounty Market
-
 A simple decentralised app simulating a bounty marketplace. Here, bounties can be created with Tasks and rewards. These bounties then appear in a marketplace for all to see. Other users can view and make submissions in response to the task of each bounty. Successfully chosen submissions will be rewarded with the reward promised.
 
 # Design Process
@@ -13,17 +12,18 @@ User stories were drafted to meet the user basic requirements for the task.
 Install truffle on your device as per the docs here: http://truffleframework.com/docs. This project requires truffle v5.0.0 or above.
 
 ### Ganache
-The project has been created and tested using ganache desktop app on port 7547. To change this port (i.e. if you are using ganache-cli) please go to ```truffle-config.js``` in the root folder and change the port number at ```port: 7545 ```. Make sure your Ganache accounts are up an running with available ETH balances.
+Install and run Ganache. More information on installation found [here](npm install -g ganache-cli).
+The project has been created and tested using ganache desktop app on port 7545. To change this port (i.e. if you are using ganache-cli) please go to ```truffle-config.js``` in the root folder and change the port number at ```port: 7545 ```. Make sure your Ganache accounts are up an running with available ETH balances.
 
 ### Metamask
-Install the Metamask Google Chrome Browser extention from [here](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) and follow instructions to set up accounts. Ensure accounts on Metamask are linked to the accounts running on Ganache.
+Install the Metamask Google Chrome Browser extension from [here](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en) and follow instructions to set up accounts. Ensure accounts on Metamask are linked to the accounts running on Ganache and connected on the correct network.
 
 ### Launch Dapp!
 You're ready to run the project! Ensure Google Chrome is open and that your are signed into metamask, with your accounts matching your ganache accounts.
 1. In your terminal window, navigate to project root folder and run ```truffle compile```.
 2.  Once compilation is successful, run ```truffle migrate```.
 3.  Still in the root folder, install the OpenZepplin library by running ```npm install openzeppelin-solidity```
-4. In the root folder, navigate to /client. From here on your command line, run ```npm run start```. A new tab should open and you should see the following page running on ```localhost:3000```:
+4. In the root folder, navigate to /client. From here on your command line, run ```npm install```. Then ```npm run start```. A new tab should open and you should see the following page running on ```localhost:3000```:
 
 *Note: Your current address will always be the address displayed at the top of the page. When switching between accounts on Metamask, it is important to ensure the address is the correct one for you.*
 
@@ -50,3 +50,5 @@ First, click on the 'Display all bounties' button to view all available bounties
 ![screen shot 2019-01-27 at 11 46 33 pm](https://user-images.githubusercontent.com/17763644/51801126-d58c8500-228d-11e9-96d0-2ee864898a39.png)
 
 Submissions will be made under the address and account you are signed into so make sure you check that this is correct. If metamask is having issues recognising your address, refresh the browser page.
+
+## Future features
