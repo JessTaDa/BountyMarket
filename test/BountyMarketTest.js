@@ -37,10 +37,11 @@ contract('BountyMarket', function(accounts) {
   // test to retrieve the response of a submission from a submission id
   it('retrieve Submittor address From Ids', async function() {
     await instance.createBountySubmission(0, "testSubmission");
-    submittorAddress = '0x4228769D0bdeB21Ba331c3f05a05f4B790706232' // msg.sender when running tests
+    submittorAddress = instance.address // msg.sender when running tests
     fetchNewSubmissionId = await instance.retrieveSubmissionsIds(0);
+    fetchSubmittorAddress = await instance.submissions[fetchNewSubmissionId].submittorAddress;
     fetchSubmissionTextandAddress = await instance.retrieveSubmissionsTextandAddressFromIds(fetchNewSubmissionId);
     console.log(fetchSubmissionTextandAddress[1]);
-      assert.equal(fetchSubmissionTextandAddress[1], '0x4228769D0bdeB21Ba331c3f05a05f4B790706232');
+      assert.equal(fetchSubmissionTextandAddress[1], fetchSubmittorAddress);
   })
 })

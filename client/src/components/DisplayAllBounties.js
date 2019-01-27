@@ -30,6 +30,7 @@ export default class DisplayAllBounties extends React.Component {
     event.preventDefault();
     let submissionText = await this.props.instance.methods.createBountySubmission(this.props.bountyId, this.state.text).send({from: this.props.ownerAddress});
     console.log('submissionText', submissionText)
+    console.log('this.instance', this.props.instance)
   }
 
   render(props) {
