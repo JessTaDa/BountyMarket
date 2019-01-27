@@ -61,7 +61,8 @@ class App extends Component {
        <div>
        <br/>
        <br/>
-       Hello! Welcome to the Bounty Market. Your address is {this.state.ownerAddress}
+       <h3>Hello! Welcome to the Bounty Market.</h3>
+       <h6>Your address is {this.state.ownerAddress}</h6>
        <br/>
        <br/>
        <CreateBounty id={this.state.id} instance={this.state.instance} ownerAddress={this.state.ownerAddress}/>
