@@ -19,7 +19,6 @@ class App extends Component {
       instance: null,
       web3: null,
       accounts: null,
-      contract: null,
       myBountyIds: [],
       allBountyIds: []
     }
@@ -43,6 +42,7 @@ class App extends Component {
     }
   };
 
+  // call contract method 'getBountyByOwnerAddress' to retrieve bounties ids by owner address and set bounty ids to state
   async myBountiesHandleClick(event) {
     event.preventDefault();
     let rawBountyIds = await this.state.instance.methods.getBountyByOwnerAddress(this.state.ownerAddress).call({from: this.state.ownerAddress})
@@ -50,9 +50,10 @@ class App extends Component {
     console.log('App.js myBountiesHandleClick.this.state', this.state)
   }
 
+  // call contract method 'getBountyByOwnerAddress' to retrieve all bounties ids from bounties created.
   async allBountiesHandleClickAll(event) {
     event.preventDefault();
-    this.setState({allBountyIds: [0,1,2,3,4,5,6,7,8,9,10]}); //testing for now})
+    this.setState({allBountyIds: [0,1,2,3,4,5]}); //testing for now, should implement method to map through each bounty in bounties[] in the future})
     console.log('allBountiesHandleClickAll.this.state', this.state)
   }
 
