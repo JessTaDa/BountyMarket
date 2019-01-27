@@ -8,3 +8,7 @@ A future feature that would make the contract more secure would be to implement 
 
 ### Restricting Access
 At the moment anyone can be a bounty poster and a submittor. The restricting access design pattern could be a future feature that is implemented to only allow certain addresses to create bounties. This would ensure the marketplace does not become too crowded. This feature has not been implemented at this point as we are awaiting clarification from the client about who should have access to bounty creation.
+
+### Prevent re-entrancy
+Steps have been taken to prevent re-entrancy in the contract. Use of address.transfer() instead of address.send()
+The contract makes use of ```.address.transfer()``` in the contract function ```approveAndTransfer``` instead of ```address.send()```. This is a safer way of implementing transactions.
