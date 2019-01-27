@@ -22,6 +22,7 @@ export default class DisplaySubmissions extends React.Component {
       submissionText: submissionPkg[0],
       submittorAddress: submissionPkg[1]
     });
+    console.log('submissionPkg', submissionPkg)
   }
 
   async handleApproval(event) {

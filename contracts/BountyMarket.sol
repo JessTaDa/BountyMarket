@@ -3,9 +3,14 @@ pragma solidity ^0.5.0;
 contract BountyMarket {
 
   event BountyCreated(uint _id, string _title, string _description, uint _reward, address _ownerAddress, bool _approved);
-
   event SubmissionCreated(uint _bountyId, address submittorAddress, uint submissionId, string _text);
   event SubmissionApprovedTransferred(uint _bountyId, address _ownerAddress, address _submittorAddress, uint reward);
+
+  address payable public owner;
+
+  constructor() public {
+    owner = msg.sender;
+  }
 
   struct Bounty {
     string title;
@@ -28,16 +33,16 @@ contract BountyMarket {
   mapping (uint => uint[]) public bountyIdToSubmissionIds;
 
   function createBounty(string memory _title, string memory _description, uint _reward, bool _approved) public {
-    uint id = bounties.push(Bounty(_title, _description, _reward, msg.sender, _approved)) -1;
-    bountyToOwner[id] = msg.sender;
-    ownerToBounty[msg.sender].push(id);
-    emit BountyCreated(id, _title, _description, _reward, msg.sender, _approved);
+    uint id = bounties.push(Bounty(_title, _description, _reward, owner, _approved)) -1;
+    bountyToOwner[id] = owner;
+    ownerToBounty[owner].push(id);
+    emit BountyCreated(id, _title, _description, _reward, owner, _approved);
   }
 
   function createBountySubmission(uint _bountyId, string memory _text) public {
-    uint submissionId = submissions.push(Submission(false, _text, msg.sender)) -1;
+    uint submissionId = submissions.push(Submission(false, _text, owner)) -1;
     bountyIdToSubmissionIds[_bountyId].push(submissionId);
-    emit SubmissionCreated(_bountyId, msg.sender, submissionId, _text);
+    emit SubmissionCreated(_bountyId, owner, submissionId, _text);
   }
 
   function retrieveSubmissionsIds(uint _bountyId) external view returns (uint[] memory _submissionIds) {
