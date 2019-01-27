@@ -30,6 +30,9 @@ contract BountyMarket is Ownable {
     _;
   }
 
+  /* circuit breaker implemented in contract */
+  modifier stopInEmergency() { require(!stopped); _; }
+
   struct Bounty {
     string title;
     string description;
@@ -49,6 +52,8 @@ contract BountyMarket is Ownable {
   mapping (uint => address) public bountyToOwner;
   mapping (address => uint[]) public ownerToBounty;
   mapping (uint => uint[]) public bountyIdToSubmissionIds;
+  /* circuit breaker implementation */
+  bool public stopped = false;
 
   /** @dev creates new bounty
   @param _title - bounty title
@@ -101,7 +106,7 @@ contract BountyMarket is Ownable {
   /** @dev bounty owner approves the submission and transfers reward amount to submittor
   @param _bountyId - bounty id of bounty in question
   @param _submissionId - submission id of winning submission to be rewarded */
-  function approveAndTransfer(uint _bountyId, uint _submissionId) payable public checkRewardDeposit(_bountyId) onlyBountyOwner(_bountyId) {
+  function approveAndTransfer(uint _bountyId, uint _submissionId) payable public checkRewardDeposit(_bountyId) onlyBountyOwner(_bountyId) stopInEmergency() {
     submissions[_submissionId].approved = true;
     submissions[_submissionId].submittorAddress.transfer(msg.value);
     emit SubmissionApprovedTransferred(_bountyId, bounties[_bountyId].ownerAddress, submissions[_submissionId].submittorAddress, bounties[_bountyId].reward);
