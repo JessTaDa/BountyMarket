@@ -8,4 +8,4 @@ before_script:
 script:
   - ganache-cli &
   - sleep 5
-  - truffle test
+  - truffle test 
