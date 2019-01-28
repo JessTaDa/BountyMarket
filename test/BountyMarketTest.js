@@ -1,10 +1,12 @@
 const BountyMarket = artifacts.require('BountyMarket.sol');
 
+
 // tests for bounty market contract
 contract('BountyMarket', function(accounts) {
 
   // set up contract instance for all tests
-  let instance
+  let instance;
+  let owner = accounts[0];
   beforeEach('setup new contract for each test', async function() {
     instance = await BountyMarket.new({gas: 6721975})
   })
@@ -37,7 +39,7 @@ contract('BountyMarket', function(accounts) {
   // test to retrieve the submittor Addressfrom Id
   it('retrieve Submittor address From Ids', async function() {
     await instance.createBountySubmission(0, "testSubmission");
-    submittorAddress = instance.address // msg.sender when running tests
+    submittorAddress = accounts[0]; // msg.sender when running tests
     fetchNewSubmissionId = await instance.retrieveSubmissionsIds(0);
     fetchSubmissionTextandAddress = await instance.retrieveSubmissionsTextandAddressFromIds(fetchNewSubmissionId);
     console.log(fetchSubmissionTextandAddress[1]);

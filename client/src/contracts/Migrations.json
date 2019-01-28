@@ -1381,18 +1381,24 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xa0BA8D3B1Db83FBa71CDDC4b978f3e33814fE47F",
-      "transactionHash": "0xb3be265c131bb5e795de53def7da8b37e206fa3fee0332b9ed5f05976dddb02a"
+      "address": "0x1dd2E57B7b8Ce734F9E74B53cdb3c54b651656D0",
+      "transactionHash": "0x82ce592d8c78206196c47ef498510f36a245e512ae6b03208eba060d4c4ffd5f"
     },
     "1548630442525": {
       "events": {},
       "links": {},
       "address": "0xD36475a0A7896AaF007E1727ECaE66256B8c09cd",
       "transactionHash": "0x3cd9a01dcfc00b01fad2c235c609fc73778bae8359134095031eeb81024b0e38"
+    },
+    "1548632695825": {
+      "events": {},
+      "links": {},
+      "address": "0x05b98ea3C478ef93DD0374CA22Ed6F02c52f1Cd5",
+      "transactionHash": "0x4f5b8270763136dc1b424172bfe0f7eb85c763422f1f5343036b809dce8c409a"
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-27T23:21:45.558Z",
+  "updatedAt": "2019-01-28T00:02:22.734Z",
   "devdoc": {
     "methods": {}
   },

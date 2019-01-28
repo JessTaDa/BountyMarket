@@ -26,11 +26,12 @@ export default class DisplayAllBounties extends React.Component {
 
   async handleClick(event) {
     console.log("trying to make submission")
-    console.log("handleClick this.state", this.state)
     event.preventDefault();
     let submissionText = await this.props.instance.methods.createBountySubmission(this.props.bountyId, this.state.text).send({from: this.props.ownerAddress});
-    console.log('submissionText', submissionText)
-    console.log('this.instance', this.props.instance)
+    console.log('submission Text in response to bounty', submissionText)
+    console.log('Contract Address:', this.props.instance._address)
+    console.log('this.props.instance.', this.props.instance)
+
   }
 
   render(props) {

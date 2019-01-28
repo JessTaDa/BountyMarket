@@ -16,12 +16,12 @@ contract BountyMarket is Ownable {
 
   /* checks that value is not zero */
   modifier valueNotZero(uint _value) {
-    require(_value != 0);
+    require(_value != 0, 'Please ensure bounty reward value is greater than zero');
     _;
   }
   /* check for sufficient funds for reward payment */
   modifier checkRewardDeposit(uint _bountyId) {
-      require(bounties[_bountyId].ownerAddress.balance >= bounties[_bountyId].reward, 'You don not have enough funds to pay the reward');
+      require(bounties[_bountyId].ownerAddress.balance >= bounties[_bountyId].reward, 'You do not have enough funds to pay the reward');
       _;
   }
   /* only bounty owner is allowed to run the function */
